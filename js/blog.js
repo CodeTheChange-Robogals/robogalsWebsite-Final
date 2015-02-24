@@ -9,7 +9,6 @@ window.onload = function() {
 	for (var i = 0; i < headers.length; i++) {
 		headers[i].onclick = expandP;
 	}
-	
 }
 
 function run() {
