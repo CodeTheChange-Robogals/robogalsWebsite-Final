@@ -1,51 +1,154 @@
 "use strict";
-var blogs = {};
-var newpars = [];
-var clicked = {};
+var blogs = [];
+var heads = [];
+var names = [];
+var clicked = [];
+var page = 0;
 window.onload = function() {
-	run();
-	var headers = document.getElementsByTagName("h2");
 
-	for (var i = 0; i < headers.length; i++) {
-		headers[i].onclick = expandP;
-	}
+	// Functions while running
+	run();
 }
 
 function run() {
-	var headers = document.getElementsByTagName("h2");
-	var paragraphs = document.getElementsByTagName("p");
-	var temp;
+	var para = "empty";
+	var paragraphs = [];
+	var hder = "empty";
+	var headers = [];
+	var nm = "empty";
+	var nmes = [];
+	var clckd = [];
+	var i = 1;
 
-	for (var i = 0; i < paragraphs.length-1; i++) {
-		temp = paragraphs[i].innerHTML;
-		if (temp != '') {
-			newpars.push(paragraphs[i]);
-		} 
-	}
-
-	for (var i = newpars.length - 1; i >= 0; i--) {
-		var p = newpars[i];
-		p.parentNode.removeChild(p);
-	}
-
-	for (var i = 0; i < newpars.length -1; i++){
-		blogs[headers[i].innerHTML] = newpars[i];
-		clicked[headers[i].innerHTML] = 0;
-	}
-}
-
-//Append a paragraph under the current
-function expandP() {
-	var para;
-	var k;
-	for (k in blogs) {
-		if (clicked[k] == 0) {
-			if (this.innerHTML == k) {
-				para = document.createElement("p");
-				para.innerHTML = blogs[k].innerHTML;
-				this.parentNode.appendChild(para);
-				clicked[k] = 1;
+	while (nm != null) {
+		nm = document.getElementById("name" + i);
+		if (i % 11 == 0) {
+			names.push(nmes);
+			nmes = [];
+		}
+		if (nm != null) {
+			nmes.push(nm);
+			if (i > 10) {
+				nm.parentNode.removeChild(nm);
 			}
 		}
+		i++;
+	}
+	names.push(nmes);
+
+	i = 1;
+
+	while (hder != null) {
+		hder = document.getElementById("event" + i);
+		if (i % 11 == 0) {
+			heads.push(headers);
+			headers = [];
+		}
+		if (hder != null) {
+			headers.push(hder);
+			if (i > 10) {
+				hder.parentNode.removeChild(hder);
+			}	
+		}
+		i++;
+	}
+	heads.push(headers);
+
+	i = 1;
+
+	while (para != null) {
+		para = document.getElementById("content" + i);
+		if (i % 11 == 0) {
+			blogs.push(paragraphs);
+			paragraphs = [];
+		}
+
+		if (para != null) {
+			paragraphs.push(para);
+
+			if (i > 10) {
+				para.parentNode.removeChild(para);
+			}
+		}
+		i++;
+	}
+	blogs.push(paragraphs);
+}
+
+function nextPage() {
+	var n = "empty";
+	var h = "empty";
+	var p = "empty";
+	var nam;
+	var previous = document.getElementById("prev").style.visibility = "visible";
+	var body = document.getElementById("blogs");
+	for (var i = 0; i < names[page].length; i++) {
+		n = names[page][i];
+		h = heads[page][i];
+		n.parentNode.removeChild(n);
+		h.parentNode.removeChild(h);
+		p = blogs[page][i];
+		p.parentNode.removeChild(p);
+	}
+	
+	page++;
+
+	for (var i = 0; i < names[page].length; i++) {
+		n = document.createElement("h1");
+		n.innerHTML = names[page][i].innerHTML;
+		body.appendChild(n);
+		h = document.createElement("h2");
+		h.innerHTML = heads[page][i].innerHTML;
+		body.appendChild(h);
+		p = document.createElement("p");
+		p.innerHTML = blogs[page][i].innerHTML;
+		body.appendChild(p);
+	}
+
+	if (names[page].length < 10) {
+		nam = document.getElementById("next").style.visibility = "hidden";
+	} else {
+		nam = document.getElementById("next").style.visibility = "visible";
 	}
 }
+// FIX
+function previousPage() {
+	var n = "empty";
+	var h = "empty";
+	var p = "empty";
+	var pre;
+	var nex = document.getElementById("next").style.visibility = "visible";
+	var body = document.getElementById("blogs");
+	// alert(page);
+	for (var i = 0; i < names[page].length; i++) {
+		n = names[page][i];
+		h = heads[page][i];
+		n.parentNode.removeChild(n);
+		h.parentNode.removeChild(h);
+		p = blogs[page][i];
+		p.parentNode.removeChild(p);
+	}
+	
+	page--;
+
+	for (var i = 0; i < names[page].length; i++) {
+		n = document.createElement("h1");
+		n.innerHTML = names[page][i].innerHTML;
+		body.appendChild(n);
+		h = document.createElement("h2");
+		h.innerHTML = heads[page][i].innerHTML;
+		body.appendChild(h);
+		p = document.createElement("p");
+		p.innerHTML = blogs[page][i].innerHTML;
+		body.appendChild(p);
+	}
+	
+	if (page == 0) {
+		pre = document.getElementById("prev").style.visibility = "hidden";
+	} else {
+		pre = document.getElementById("prev").style.visibility = "visible";
+	}
+}
+
+
+

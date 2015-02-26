@@ -59,7 +59,7 @@ General
     font-family: 'Play';
     font-size: 1em;
     background: #F0FFFF;
-    padding-bottom: 2em;
+    padding-bottom: 1em;
 
 }
 
@@ -107,14 +107,47 @@ BLOGS
 	height: 2em;
 	vertical-align: bottom;
 	font-size: 1.5em;
+	padding-top: 0.5em;
+	padding-left: 0.5em;
 }
 
 #blogs p {
 	padding-top: 1em;
+	padding-bottom: 1.2em;
 }
 
 #blogs h2:hover {
 	opacity: 0.6;
+}
+
+#prev {
+	float: left;
+	margin-top: 1em;
+	padding:5px;
+	background-color: #F0FFFF;
+	border: 2px solid #00B4FF;
+	color: #000;
+	text-decoration: none;
+	visibility: hidden;
+	opacity: 0.7;
+}
+
+#next {
+	float: right;
+	margin-top: 1em;
+	padding:5px;
+	background-color: #F0FFFF;
+	border: 2px solid #00B4FF;
+	color: #000;
+	text-decoration: none;
+	opacity: 0.7;
+}
+
+#prev:hover {
+	opacity: 1;
+}
+#next:hover {
+	opacity: 1;
 }
 
 /******
