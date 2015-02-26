@@ -1,154 +1,149 @@
-"use strict";
-var blogs = [];
-var heads = [];
-var names = [];
-var clicked = [];
-var page = 0;
-window.onload = function() {
+"use-strict"
 
-	// Functions while running
-	run();
+var blogs = []
+var h1 = []
+var h2 = []
+var paragraphs = []
+var area;
+var i = 0;
+var modAmount = 11;
+var blogArea;
+
+window.onload = function(){
+	h1 = document.getElementsByTagName("h1");
+	h2 = document.getElementsByTagName("h2");
+	paragraphs = document.getElementsByTagName("p");
+	area = document.getElementById("mainBody");
+
+	blogs[0] = []; //header1
+	blogs[1] = []; //header2
+	blogs[2] = []; //paragraphs
+
+	for (var j = 0; j < paragraphs.length; j++){
+		blogs[0][j] = h1[j].innerHTML;
+		blogs[1][j] = h2[j].innerHTML;
+		blogs[2][j] = paragraphs[j].innerHTML;
+	}
+
+	area.removeChild(document.getElementById("blogs"));
+
+	blogArea = document.createElement("div"); 
+	blogArea.setAttribute("id", "blogs");
+
+	for (; i < blogs[0].length && (i+1) % modAmount != 0; i++){
+		var blog = document.createElement("div");
+		blog.setAttribute("id", "blog" + i);
+
+		var h1New = document.createElement("h1");
+		var h2New = document.createElement("h2");
+		//var parNew = document.createElement("p");	
+
+		h1New.innerHTML = blogs[0][i];
+		h2New.innerHTML = blogs[1][i];
+		//parNew.innerHTML = blogs[2][i];
+
+		blog.appendChild(h1New);
+		blog.appendChild(h2New);
+		//blog.appendChild(parNew);
+
+		blogArea.appendChild(blog);
+	}
+
+	area.appendChild(blogArea);
+	createPageButton("next");
 }
 
-function run() {
-	var para = "empty";
-	var paragraphs = [];
-	var hder = "empty";
-	var headers = [];
-	var nm = "empty";
-	var nmes = [];
-	var clckd = [];
-	var i = 1;
-
-	while (nm != null) {
-		nm = document.getElementById("name" + i);
-		if (i % 11 == 0) {
-			names.push(nmes);
-			nmes = [];
-		}
-		if (nm != null) {
-			nmes.push(nm);
-			if (i > 10) {
-				nm.parentNode.removeChild(nm);
-			}
-		}
-		i++;
-	}
-	names.push(nmes);
-
-	i = 1;
-
-	while (hder != null) {
-		hder = document.getElementById("event" + i);
-		if (i % 11 == 0) {
-			heads.push(headers);
-			headers = [];
-		}
-		if (hder != null) {
-			headers.push(hder);
-			if (i > 10) {
-				hder.parentNode.removeChild(hder);
-			}	
-		}
-		i++;
-	}
-	heads.push(headers);
-
-	i = 1;
-
-	while (para != null) {
-		para = document.getElementById("content" + i);
-		if (i % 11 == 0) {
-			blogs.push(paragraphs);
-			paragraphs = [];
-		}
-
-		if (para != null) {
-			paragraphs.push(para);
-
-			if (i > 10) {
-				para.parentNode.removeChild(para);
-			}
-		}
-		i++;
-	}
-	blogs.push(paragraphs);
+function expandParagraph(){
+	var paragraph = document.createElement("p");
+	paragraph.innerHTML = this.parentNode.innerHTML;
+	this.parentNode.appendChild(paragraph)
+	console.log("REGISTERING!!");
 }
 
-function nextPage() {
-	var n = "empty";
-	var h = "empty";
-	var p = "empty";
-	var nam;
-	var previous = document.getElementById("prev").style.visibility = "visible";
-	var body = document.getElementById("blogs");
-	for (var i = 0; i < names[page].length; i++) {
-		n = names[page][i];
-		h = heads[page][i];
-		n.parentNode.removeChild(n);
-		h.parentNode.removeChild(h);
-		p = blogs[page][i];
-		p.parentNode.removeChild(p);
-	}
-	
-	page++;
+function createPageButton(pageType){
+	var nextButton = document.createElement("button");
+	nextButton.innerHTML = ("Next Page");
+	nextButton.setAttribute("id", "next");
+	nextButton.onclick = nextPage;
 
-	for (var i = 0; i < names[page].length; i++) {
-		n = document.createElement("h1");
-		n.innerHTML = names[page][i].innerHTML;
-		body.appendChild(n);
-		h = document.createElement("h2");
-		h.innerHTML = heads[page][i].innerHTML;
-		body.appendChild(h);
-		p = document.createElement("p");
-		p.innerHTML = blogs[page][i].innerHTML;
-		body.appendChild(p);
-	}
+	var prevButton = document.createElement("button");
+	prevButton.innerHTML = ("Previous Page");
+	prevButton.setAttribute("id", "prev");
+	prevButton.onclick = previousPage;
 
-	if (names[page].length < 10) {
-		nam = document.getElementById("next").style.visibility = "hidden";
-	} else {
-		nam = document.getElementById("next").style.visibility = "visible";
-	}
-}
-// FIX
-function previousPage() {
-	var n = "empty";
-	var h = "empty";
-	var p = "empty";
-	var pre;
-	var nex = document.getElementById("next").style.visibility = "visible";
-	var body = document.getElementById("blogs");
-	// alert(page);
-	for (var i = 0; i < names[page].length; i++) {
-		n = names[page][i];
-		h = heads[page][i];
-		n.parentNode.removeChild(n);
-		h.parentNode.removeChild(h);
-		p = blogs[page][i];
-		p.parentNode.removeChild(p);
-	}
-	
-	page--;
+	nextButton.style.visibility = "visible";
+	prevButton.style.visibility = "visible";
 
-	for (var i = 0; i < names[page].length; i++) {
-		n = document.createElement("h1");
-		n.innerHTML = names[page][i].innerHTML;
-		body.appendChild(n);
-		h = document.createElement("h2");
-		h.innerHTML = heads[page][i].innerHTML;
-		body.appendChild(h);
-		p = document.createElement("p");
-		p.innerHTML = blogs[page][i].innerHTML;
-		body.appendChild(p);
-	}
-	
-	if (page == 0) {
-		pre = document.getElementById("prev").style.visibility = "hidden";
-	} else {
-		pre = document.getElementById("prev").style.visibility = "visible";
-	}
+	area.appendChild(nextButton);
+	area.appendChild(prevButton);
 }
 
+function nextPage(){
+	area.removeChild(document.getElementById("blogs"));
+	area.removeChild(document.getElementById("next"));
+	area.removeChild(document.getElementById("prev"));
 
+	blogArea = document.createElement("div"); 
+	blogArea.setAttribute("id", "blogs");
 
+	modAmount += 9;
+
+	for (; i < modAmount && i < blogs[0].length; i++){
+		var blog = document.createElement("div");
+		blog.setAttribute("id", "blog" + i);
+
+		var h1New = document.createElement("h1");
+		var h2New = document.createElement("h2");
+		//var parNew = document.createElement("p");	
+
+		h1New.innerHTML = blogs[0][i];
+		h2New.innerHTML = blogs[1][i];
+		//parNew.innerHTML = blogs[2][i];
+
+		blog.appendChild(h1New);
+		blog.appendChild(h2New);
+		//blog.appendChild(parNew);
+
+		blogArea.appendChild(blog);
+	}
+
+	area.appendChild(blogArea);
+	createPageButton("next");
+}
+
+function previousPage(){
+	area.removeChild(document.getElementById("blogs"));
+	area.removeChild(document.getElementById("next"));
+	area.removeChild(document.getElementById("prev"));
+
+	blogArea = document.createElement("div"); 
+	blogArea.setAttribute("id", "blogs");
+
+	if (blogs[0].length - i == 0)
+		i = 0;
+	else
+		i -= 10;
+	modAmount -= 10;
+
+	for (; i < modAmount && i < blogs[0].length; i++){
+		var blog = document.createElement("div");
+		blog.setAttribute("id", "blog" + i);
+
+		var h1New = document.createElement("h1");
+		var h2New = document.createElement("h2");
+		//var parNew = document.createElement("p");	
+
+		h1New.innerHTML = blogs[0][i];
+		h2New.innerHTML = blogs[1][i];
+		//parNew.innerHTML = blogs[2][i];
+
+		blog.appendChild(h1New);
+		blog.appendChild(h2New);
+		//blog.appendChild(parNew);
+
+		blogArea.appendChild(blog);
+	}
+
+	area.appendChild(blogArea);
+	createPageButton("prev");
+}
