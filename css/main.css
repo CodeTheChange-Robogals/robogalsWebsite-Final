@@ -306,6 +306,7 @@ EXECUTIVES
 .Exec .picture {
 	width: 262px;
 	height: 262px;
+	/* Remove this line below */
 	background: lightgrey;
 }
 
@@ -352,7 +353,7 @@ BOTTOM BAR
 .bottombar {
 	position: fixed;
 	bottom: 3%;
-	left: 1%;
+	left: 0.5%;
 	width: 20%;
 	opacity: 0.4;
 }
@@ -368,6 +369,6 @@ BOTTOM BAR
 
 .bottombar li {
 	display: inline;
-	margin-left: 0.7em;
+	margin-left: 0.5em;
 }
 
