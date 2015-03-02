@@ -74,14 +74,76 @@ General
     margin: 0 auto;
 }
 
-/******
-Smaller screens 
-******/
+/*****
+HEADER
+*****/
+/* set the background colour */
+.dropdown,
+.dropdown ul{
+  background : #F0FFFF;
+  text-align: center;
+  padding:0;
+}
 
-@media (max-width: 875px) {
-	.bottombar {
-		visibility: hidden;
-	}
+#logoNav{
+	width: 40%; 
+	padding-right: 5%; 
+	margin-left:-5px
+}
+
+/* pad items, set their text colour, and fade their background colour */
+.dropdown a,
+.dropdown span{
+  padding    : 0.25em 0.5em;
+  color      : #00B4FF;
+  transition : background 0.2s;
+}
+
+/* set the background colour of active items */
+.dropdown li:hover > a,
+.dropdown li:hover > span,
+.dropdown li.dropdownOpen > a,
+.dropdown li.dropdownOpen > span{
+  background : #EED2EE;
+}
+
+.dropdown li {
+	display: inline-block;
+}
+
+/*****
+BANNER
+*****/
+.banner {
+	width:100%;
+	height:200px;
+    position:relative;
+}
+
+.bannerPic {
+	width:100%;
+    height:100%;
+    opacity: 0.4;
+}
+
+.bannerText {
+	position: absolute ;
+	bottom: 0;
+	right: 3;
+	font-size: 60px;
+}
+
+/*******
+HOME
+********/
+.Home h3{
+	font-size: 3em;
+	padding: 1em;
+}
+
+.outside {
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 /******
@@ -146,69 +208,9 @@ BLOGS
 #prev:hover {
 	opacity: 1;
 }
+
 #next:hover {
 	opacity: 1;
-}
-
-/******
-CONTACT 
-******/
-
-.Contact #Emails {
-	text-align: center;
-	padding: 5%;
-}
-
-.Contact #Emails a button{
-	border-radius: 3px;
-	color: #F0FFFF;
-	background: #00B4FF;
-	padding: 10px 20px 10px 20px;
-	text-decoration: none;
-}
-
-.Contact #Emails a button:hover {
-	color: #EED2EE;
-}
-.Contact #Mailing {
-	text-align: center;
-	font-size:  1.4em;
-}
-/*****
-HEADER
-*****/
-/* set the background colour */
-.dropdown,
-.dropdown ul{
-  background : #F0FFFF;
-  text-align: right;
-  padding:0;
-}
-
- #logoNav{
-	width: 40%; 
-	padding-right: 5%; 
-	margin-left:-5px
-}
-
-/* pad items, set their text colour, and fade their background colour */
-.dropdown a,
-.dropdown span{
-  padding    : 0.25em 0.5em;
-  color      : #00B4FF;
-  transition : background 0.2s;
-}
-
-/* set the background colour of active items */
-.dropdown li:hover > a,
-.dropdown li:hover > span,
-.dropdown li.dropdownOpen > a,
-.dropdown li.dropdownOpen > span{
-  background : #EED2EE;
-}
-
-.dropdown li {
-	display: inline-block;
 }
 
 /*******
@@ -219,63 +221,25 @@ SPONSORSHIP
 	margin: 5%;
 }
 
-/*****
-BANNER
-*****/
-.banner {
-	width:100%;
-	height:200px;
-    position:relative;
+/******
+ABOUT PAGE
+*******/
+.About .Question {
+    float: left;
+    font-size: 3em;
+	font-family: 'Holtwood One SC', serif;
+	margin-left: 1em;
+	color: #00B4FF;
 }
 
-.bannerPic {
-	width:100%;
-    height:100%;
-    opacity: 0.4;
+.About .divbackground {
+    width: 600px;
+    padding: 10px;
+    border: 5px #00B4FF;
+    margin: 20px; 
+    margin-left: 300px;
+    text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
 }
-
-.bannerText {
-	position: absolute ;
-	bottom: 0;
-	right: 3;
-	font-size: 60px;
-}
-
-/*******
-PARTNERS
-*********/
-.Partners #execPics {
-	margin-top: 50px;
-	text-align: center;
-}
-
-.Partners #partnerPics .person {
-	display: inline-block;
-	padding: 1%;
-	text-align: left;
-}
-
-.Partners .picture {
-	width: 100px;
-	height: 100px;	
-}
-.Partners .picture img {
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: auto;
-	margin-bottom: auto;
-}
-
-.Partners .title {
-	width: 262px;
-	height: 18px;
-}
-
-.Partners .description {
-	width: 262px;
-	height: 85px;
-}
-
 
 /*******
 EXECUTIVES
@@ -319,32 +283,69 @@ EXECUTIVES
 	width: 262px;
 	height: 85px;
 }
-/******
-ABOUT PAGE
-*******/
-.About .Question {
-    float: left;
-    font-size: 3em;
-	font-family: 'Holtwood One SC', serif;
-	margin-left: 1em;
-	color: #00B4FF;
-}
-
-.About .divbackground {
-    width: 600px;
-    padding: 10px;
-    border: 5px #00B4FF;
-    margin: 20px; 
-    margin-left: 300px;
-    text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
-}
-
 
 /*******
-HOME
-********/
-.Home h3{
-	font-size: 3em;
+PARTNERS
+*********/
+.Partners #execPics {
+	margin-top: 50px;
+	text-align: center;
+}
+
+.Partners #partnerPics .person {
+	display: inline-block;
+	padding: 1%;
+	text-align: left;
+}
+
+.Partners .picture {
+	width: 100px;
+	height: 100px;	
+}
+.Partners .picture img {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.Partners .title {
+	width: 262px;
+	height: 18px;
+}
+
+.Partners .description {
+	width: 262px;
+	height: 85px;
+}
+
+/******
+CONTACT 
+******/
+
+.Contact #Emails {
+	text-align: center;
+	padding: 5%;
+}
+
+.Contact #Mailing {
+	text-align: center;
+	font-size:  1.4em;
+}
+
+#socialmedia {
+	margin: 1em;
+}
+
+#socialmedia a {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+#internationalLink {
+	font-size: 1.5em;
+	text-decoration: none;
+	/*padding-bottom: 1em;*/
 }
 
 /*****
